@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/styles.scss";
+import "../styles/container.scss";
 
 function Container(props: { children: React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) {
 

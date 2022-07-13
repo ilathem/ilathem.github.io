@@ -10,13 +10,15 @@ import {
 } from 'react-icons/fa'
 import { SiCplusplus, SiC, SiHtml5, SiCss3, SiNodedotjs, SiTypescript } from 'react-icons/si';
 
+import '../styles/about.scss';
+
 function About() {
 
   return (
     <div className="about-container">
       <div className="about-me-div">
         <h1 className="about-me-header">About Me</h1>
-        <p className="about-me-txt">Junior-level developer with a bachelor's in software engineering who specializes in full-stack web development.</p>
+        <p className="about-me-txt">Junior-level developer pursuing a bachelor's in software engineering with a focus in full-stack web development.</p>
         <br />
         <p className="about-me-txt">
           I'm passionate about building beautiful, effective UIs that run on a highly
@@ -31,7 +33,7 @@ function About() {
           </li>
           <li className="about-me-li">
             <FaDownload style={{ marginRight: '.5em'}}/>
-            College Transcript
+            (Unofficial) College Transcript
           </li>
           <li className="about-me-li" onClick={() => {
             window.open("https://github.com/ilathem", '_blank');
@@ -55,12 +57,12 @@ function About() {
               <br />
               React
             </div>
-            <div className="skills-grid-item level-3" id="item2">
+            <div className="skills-grid-item level-2" id="item2">
               <FaJava className="skills-grid-item-icon"/>
               <br/>
               Java
             </div>
-            <div className="skills-grid-item level-3" id="item3">
+            <div className="skills-grid-item level-2" id="item3">
               <FaJsSquare className="skills-grid-item-icon"/>
               <br />
               JavaScript
@@ -80,7 +82,7 @@ function About() {
               <br />
               HTML
             </div>
-            <div className="skills-grid-item level-3" id="item6">
+            <div className="skills-grid-item level-1" id="item6">
               <SiTypescript className="skills-grid-item-icon"/>
               <br />
               TypeScript

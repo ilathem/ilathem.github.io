@@ -1,7 +1,7 @@
 @use 'base';
 
 .project-container {
-  // border: 1px solid green;
+  // border: 1px solid red;
   display: flex;
   flex-direction: row-reverse;
   background-color: lighten(base.$background-primary, 10%);
@@ -11,6 +11,30 @@
   max-width: 75vw;
   align-items: flex-start;
   justify-content: center;
+  margin: .5em;
+  opacity: 0;
+
+  animation-fill-mode: forwards;
+  animation-name: slideUp;
+  animation-duration: 500ms;
+
+
+  // @for $i from 2 through 4 {
+  //   &:nth-child(#{$i}n) {
+  //     animation-delay: #{$i * 250}ms;
+  //   }
+  // }
+  
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(1000px);
+  }
+  to {
+    transform: traslateY(0);
+    opacity: 1;
+  }
 }
 
 .project-preview {

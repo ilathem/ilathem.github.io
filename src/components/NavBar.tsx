@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import '../styles/styles.scss';
+import '../styles/navbar.scss';
 
 function NavBar() {
 

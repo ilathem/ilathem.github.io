@@ -1,0 +1,69 @@
+@use 'base';
+
+.navbar {
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  margin-top: 20px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.nav-link {
+  // border: 1px solid red;
+  border-radius: .5em;
+  width: min-content;
+  background-color: base.$background-dark;
+  color: base.$text-clr;
+  text-decoration: none;
+  padding: 1em;
+  margin: .5em;
+  cursor: pointer;
+  position: relative;
+  opacity: 0;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  
+
+  &:hover {
+    color: base.$white; 
+  }
+
+  @for $i from 1 through 4 {
+    &:nth-child(n + #{$i}) {
+      animation-delay: $i * 100ms;
+    }
+  }
+}
+
+.selected {
+  background-color: base.$primary-clr; 
+  color: base.$white;
+  font-weight: bold;
+}
+
+@keyframes bounce {
+  0% { 
+    transform: translateY(-100px); 
+    opacity: 1;
+  }
+  10% { transform: translateY(0px); }
+  20% { transform: translateY(-50px); }
+  30% { transform: translateY(0px); }
+  40% { transform: translateY(-25px); }
+  50% { transform: translateY(0px); }
+  60% { transform: translateY(-12.5px); }
+  70% { transform: translateY(0px); }
+  80% { transform: translateY(-6px); }
+  90% { transform: translateY(0px); }
+  95% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); opacity: 1;}
+} 

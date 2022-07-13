@@ -1,0 +1,32 @@
+@use 'base';
+
+.intro-greeting {
+  // border: 1px solid red;
+  color: base.$text-clr;
+  font-family: base.$font-stack;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+
+.intro-main {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.intro-sub {
+  font-size: 1.5em;
+}
+
+.standout {
+  color: base.$primary-clr;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
