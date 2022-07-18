@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './index.css'; 
+import { FaGithub } from 'react-icons/fa';
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
       transition: {
         delay: 0.5,
         when: 'beforeChildren',
-        staggerChildren: 0.05,
+        staggerChildren: 0.1,
       },
     },
   }
@@ -81,6 +82,17 @@ function App() {
     }
   }
 
+  const reachMeVariant = {
+    hidden: { 
+      opacity: 0,
+      x: -50
+     },
+     visible: {
+      x: 0,
+      opacity: .8,
+     }
+  }
+
   // idea: use svg line drawing https://www.framer.com/docs/component/###svg-line-drawing for intro name
 
   // className= 'border-4 border-indigo-500'
@@ -132,11 +144,16 @@ function App() {
         </div>
 
         <div
-          className='row-start-2 col-span-2 '
+          className='row-start-2 col-span-2 flex flex-col'
         >
           <motion.p
+            className='text-sm text-center'
+            variants={reachMeVariant}
 
           >Reach me here</motion.p>
+          
+          
+
 
         </div>
         
