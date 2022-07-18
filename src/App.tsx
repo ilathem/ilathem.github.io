@@ -19,7 +19,7 @@ function App() {
       transition: {
         delay: 0.5,
         when: 'beforeChildren',
-        staggerChildren: 0.4,
+        staggerChildren: 0.05,
       },
     },
   }
@@ -32,51 +32,114 @@ function App() {
      visible: {
       x: 0,
       opacity: 1,
-      transition: {
-        staggerChildren: 0.5,
-      }
      }
   }
 
   const nameVariant = {
     hidden: {
       color: 'rgb(226 232 240)',
+      opacity: .5,
+    },
+    visible: (i: number) => ({
+      color: 'rgb(29 235 217)',
+      opacity: 1,
+      transition: {
+        delay: i * .05 + .25,
+      }
+    }),
+  }
+
+  const titleVariant = {
+    hidden: { 
+      opacity: 0,
+      x: 50
+     },
+     visible: {
+      x: 0,
+      opacity: .8,
+     }
+  }
+
+  const introVariant = {
+    hidden: {
+      opacity: 0,
+      x: -50
     },
     visible: {
-      color: 'rgb(13 148 136)',
-      transition: {
-        delay: 1
-      }
+      opacity: .8,
+      x: 0,
+    }
+  }
+
+  const hrVariant = {
+    hidden: {
+      scale: 0,
     },
-    
+    visible: {
+      opacity: .8,
+      scale: 1,
+    }
   }
 
   // idea: use svg line drawing https://www.framer.com/docs/component/###svg-line-drawing for intro name
 
+  // className= 'border-4 border-indigo-500'
+
   return (
     <div className="bg-stone-600 w-screen h-screen flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
       <motion.div
-        className="w-5/6 h-5/6 md:w-3/4 md:h-3/4 bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-6 gap-2"
+        className="w-5/6 h-5/6 lg:w-3/4 lg:h-3/4 bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5"
         variants={containerVariant}
         initial='hidden'
         animate='visible'
       >
-        <motion.h1
-          className="col-span-2 p-6 text-3xl"
-          variants={headerVariant}
-        >Hi, I'm
-          {[' I', 's', 'a', 'i', 'a', 'h', ' ', 'L', 'a', 't', 'h', 'e', 'm'].map(letter => {
-            return (
-              <motion.span
-                variants={nameVariant}
-              >{letter}</motion.span>
-            )
-          })}
-          {/* <motion.span
-            className="text-teal-600"
-            variants={nameVariant}
-          > Isaiah Lathem</motion.span> */}
-        </motion.h1>
+        <div className='row-start-1 col-span-2 flex flex-col'> 
+          <div>
+            <div>
+              <motion.h1
+                className="m-0 text-xl sm:text-2xl lg:text-4xl h-fit break-after-column"
+                variants={headerVariant}
+              >Hi, I'm
+                {[' I', 's', 'a', 'i', 'a', 'h', ' ', 'L', 'a', 't', 'h', 'e', 'm'].map((letter, index) => {
+                  return (
+                    <motion.span
+                      variants={nameVariant}
+                      custom={index}
+                    >{letter}</motion.span>
+                  )
+                })}
+              </motion.h1>
+            </div>
+            <motion.p
+              className="text-sm h-fit m-0 p-0 text-right"
+              variants={titleVariant}
+            >
+              Software developer
+            </motion.p>
+          </div>
+          <div
+            className= 'grow flex flex-col justify-evenly'
+          >
+            <motion.p
+            className='text-xl md:text-2xl text-center font-["Edu_TAS_Beginner"] mb-3'
+            variants={introVariant}
+            >I like to build stuff with computers.</motion.p>
+            <motion.hr 
+            className='justify-self-end mb-0'
+            variants={hrVariant}
+            />
+          </div>
+        </div>
+
+        <div
+          className='row-start-2 col-span-2 '
+        >
+          <motion.p
+
+          >Reach me here</motion.p>
+
+        </div>
+        
       </motion.div>
     </div>
   );
