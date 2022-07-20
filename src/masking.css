@@ -1,0 +1,17 @@
+.mask {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 20;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+@keyframes strokeOffset { 
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#mask-I-char {
+  animation: strokeOffset 1s linear forwards;
+}
