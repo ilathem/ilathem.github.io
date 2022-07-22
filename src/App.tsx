@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useAnimationControls, useAnimationFrame } from 'framer-motion';
 import './index.css'; 
 import {
@@ -7,7 +7,7 @@ import {
   nameVariant,
   titleVariant,
   introVariant,
-  hrVariant,
+  hr1Variant,
   reachMeSectionVariant,
   reachMeVariant,
   discordVariant,
@@ -22,10 +22,82 @@ import {
   githubVariant,
   viewWorkSectionVariant,
   bounceInVariant,
+  hr2Variant,
 } from './components/variants';
 
 
 function App() {
+
+  const introStr = "I like to build stuff with computers";
+  const introChars = introStr.split("");
+
+  const reachMeStr = "Reach me here"
+  const reachMeChars = reachMeStr.split("");
+
+  // console.log(introChars)
+
+
+  const containerControls = useAnimationControls();
+  const headerControls = useAnimationControls();
+  const titleControls = useAnimationControls();
+  const introControls = useAnimationControls();
+  const hr1Controls = useAnimationControls();
+  const reachMeControls = useAnimationControls();
+  const discordControls = useAnimationControls();
+  const linkedControls = useAnimationControls();
+  const hr2Controls = useAnimationControls();
+
+
+  useEffect(() => {
+    containerControls.start("hidden");
+    headerControls.start('hidden');
+    titleControls.start('hidden');
+    introControls.start('hidden');
+    hr1Controls.start('hidden');
+    reachMeControls.start('hidden');
+    discordControls.start('hidden');
+    linkedControls.start('hidden');
+    hr2Controls.start('hidden');
+
+    setTimeout(() => {
+      containerControls.start('visible');
+    }, 500)
+
+    setTimeout(() => {
+      headerControls.start('visible');
+    }, 1000)
+
+    setTimeout(() => {
+      titleControls.start('visible');
+    }, 1500)
+
+    setTimeout(() => {
+      introControls.start('visible');
+    }, 2000)
+
+    setTimeout(() => {
+      hr1Controls.start('visible');
+    }, 2250)
+
+    setTimeout(() => {
+      reachMeControls.start('visible');
+    }, 2750)
+
+    setTimeout(() => {
+      discordControls.start('visible');
+    }, 3250)
+
+    setTimeout(() => {
+      linkedControls.start('visible')
+    }, 3750)
+
+    setTimeout(() => {
+      introControls.start('hover');
+    }, 4000)
+
+  }, [])
+
+  
 
   const [discordHover, setDiscordHover] = useState(false);
   const [linkedHover, setLinkedHover] = useState(false);
@@ -36,15 +108,15 @@ function App() {
       <motion.div
         className="w-5/6 h-5/6  bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
         variants={containerVariant}
-        initial='hidden'
-        animate='visible'
+        animate={containerControls}
       >
         <motion.div className='row-start-1 col-span-2 flex flex-col '> 
           <motion.div className='sm:w-[28rem] sm:self-center border-none border-2'>
             <motion.div>
               <motion.h1
-                className="m-0 text-3xl sm:text-4xl h-fit "
+                className="m-0 text-2xl sm:text-4xl h-fit "
                 variants={headerVariant}
+                animate={headerControls}
               >Hi, I'm
                 {[' I', 's', 'a', 'i', 'a', 'h', ' ', 'L', 'a', 't', 'h', 'e', 'm'].map((letter, index) => {
                   return (
@@ -60,6 +132,7 @@ function App() {
             <motion.p
               className="text-sm h-fit m-0 p-0 text-right"
               variants={titleVariant}
+              animate={titleControls}
             >
               Software developer
             </motion.p>
@@ -67,29 +140,61 @@ function App() {
 
           <motion.div className= 'flex grow flex-col justify-around'>
             <motion.p
-            className='text-xl md:text-2xl text-center font-["Edu_TAS_Beginner"] mb-3'
-            variants={introVariant}
-            >I like to build stuff with computers.</motion.p>
+            className='text-xl sm:text-3xl text-center font-["Edu_TAS_Beginner"] mb-3'
+            onMouseEnter={() => introControls.start('hover')}
+            >
+              {introChars.map((char, i) => {
+                // manually enter in spaces bc inline block removes them...?
+                if (char.charCodeAt(0) === 32) char = "\u00A0"
+                return (
+                  <motion.span
+                    key={i}
+                    style={{display: 'inline-block'}}
+                    custom={i}
+                    variants={introVariant}
+                    animate={introControls}
+                  >
+                    {char}
+                  </motion.span>
+                )
+              })}
+            </motion.p>
           </motion.div>
           <motion.hr 
             className='justify-self-end mb-0'
-            variants={hrVariant}
+            variants={hr1Variant}
+            animate={hr1Controls}
             />
         </motion.div>
 
 
 
-        <motion.div className='row-start-2 col-span-2 flex flex-col items-center justify-between'
+        <motion.div className='row-start-2 col-span-2 flex flex-col items-center justify-around'
           variants={reachMeSectionVariant}
         >
 
           <motion.p
-            className='text-md text-center'
-            variants={reachMeVariant}
-          >Reach me here</motion.p>
+            className='text-lg text-center'
+          >
+            {"Reach me here".split("").map((char, i) => {
+              if (char.charCodeAt(0) === 32) char = "\u00A0"
+              return (
+                <motion.span
+                  key={i}
+                  style={{display: 'inline-block'}}
+                  custom={i}
+                  variants={reachMeVariant}
+                  animate={reachMeControls}
+                >
+                  {char}
+                </motion.span>
+              )
+            })}
+          </motion.p>
 
           <motion.svg width="400" height="50" viewBox="0 0 292 80" fill="none" xmlns="http://www.w3.org/2000/svg"
             variants={discordVariant}
+            animate={discordControls}
             className="cursor-pointer m-2"
             onMouseEnter={() => setDiscordHover(true)}
             onMouseLeave={() => setDiscordHover(false)}
@@ -142,6 +247,7 @@ function App() {
             className="cursor-pointer m-2"
 
             variants={linkedInVariant}
+            animate={linkedControls}
 
             onMouseEnter={() => setLinkedHover(true)}
             onMouseLeave={() => setLinkedHover(false)}
@@ -171,7 +277,8 @@ function App() {
 
           <motion.hr 
             className="justify-self-end w-full"
-            variants={hrVariant}
+            variants={hr2Variant}
+            animate={hr2Controls}
           />
 
         </motion.div>

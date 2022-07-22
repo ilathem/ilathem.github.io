@@ -11,9 +11,9 @@ export const containerVariant = {
     scale: 1,
     rotate: 0,
     transition: {
-      delay: 0.5,
-      when: 'beforeChildren',
-      staggerChildren: .5,
+      // delay: 1,
+      // when: 'beforeChildren',
+      // staggerChildren: .5,
     },
   },
 }
@@ -57,21 +57,67 @@ export const titleVariant = {
 export const introVariant = {
   hidden: {
     opacity: 0,
-    x: -50
+    y: "100%",
   },
-  visible: {
+  visible: (i: number) => ({
     opacity: .8,
-    x: 0,
-  },
+    y: 0,
+    transition: {
+      delay: i * .01,
+    }
+  }),
+  hover: (i: number) => ({
+    scaleX: [1, 1.2, .9, 1.1, 1],
+    scaleY: [1, .8, 1.1, .90, 1],
+    y: [0, 0, -20, 0,  0],
+    color: [
+      'rgb(226 232 240)',
+      'rgb(66, 135, 245)',
+      'rgb(224, 36, 174)',
+      'rgb(48, 184, 24)',
+      'rgb(27, 191, 186)',
+      'rgb(226 232 240)',],
+    transition: {
+      duration: .75,
+      delay: i * .05,
+    },
+  }),
+  base: (i: number) => ({
+    y: 0,
+    color: 'rgb(226 232 240)',
+    transition: {
+      color: {
+        delay: i * .02,
+      }
+    }
+  })
 }
 
-export const hrVariant = {
+export const hr1Variant = {
   hidden: {
     scale: 0,
   },
   visible: {
     opacity: .8,
+    originX: 0,
     scale: 1,
+    transition: {
+      duration: .5,
+    }
+  },
+}
+
+export const hr2Variant = {
+  hidden: {
+    scale: 0,
+  },
+  visible: {
+    opacity: .8,
+    originX: 0,
+    scale: 1,
+    transition: {
+      duration: .5,
+    }
   },
 }
 
@@ -86,12 +132,15 @@ export const reachMeSectionVariant = {
 export const reachMeVariant = {
   hidden: { 
     opacity: 0,
-    x: -50
+    y: "100%",
    },
-   visible: {
-    x: 0,
+   visible: (i: number) => ({
+    y: 0,
     opacity: .8,
-   },
+    transition: {
+      delay: i * .02,
+    }
+   }),
 }
 
 export const discordVariant = {
