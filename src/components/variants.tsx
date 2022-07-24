@@ -78,7 +78,7 @@ export const introVariant = {
       'rgb(27, 191, 186)',
       'rgb(226 232 240)',],
     transition: {
-      duration: .75,
+      duration: 1,
       delay: i * .05,
     },
   }),
@@ -153,6 +153,63 @@ export const discordVariant = {
         staggerChildren: .05,
       }
     },
+    hover: {
+      transition: {
+        staggerChildren: .05,
+      }
+    }
+}
+
+export const logoDiscordVariant = {
+  hidden: {
+    rotate: 180,
+    x: "50%",
+  },
+  visible: {
+    rotate: 0,
+    x: 0,
+    fill: 'rgb(226 232 240)',
+    transition: {
+      type: "spring",
+      damping: 15,
+    }
+  },
+  hover: {
+    scaleX: [1, 1.2, .9, 1.1, 1],
+    scaleY: [1, .8, 1.1, .90, 1],
+    y: [0, 0, -20, 0,  0],
+    fill: 'rgb(88, 101, 242)'
+  },
+  base: {
+    y: 0,
+    fill: 'rgb(226 232 240)',
+  }
+}
+
+export const contactDiscordLetterVariant = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    fill: 'rgb(226 232 240)',
+    transition: {
+      type: "spring",
+      bounce: 0.6,
+    }
+  },
+  hover: {
+    scaleX: [1, 1.2, .9, 1.1, 1],
+    scaleY: [1, .8, 1.1, .90, 1],
+    y: [0, 0, -20, 0,  0],
+    fill: 'rgb(88, 101, 242)'
+  },
+  base: {
+    y: 0,
+    fill: 'rgb(226 232 240)',
+  }
 }
 
 export const logoVariant = {
@@ -163,11 +220,22 @@ export const logoVariant = {
   visible: {
     rotate: 0,
     x: 0,
+    fill: 'rgb(226 232 240)',
     transition: {
       type: "spring",
       damping: 15,
     }
   },
+  hover: {
+    scaleX: [1, 1.2, .9, 1.1, 1],
+    scaleY: [1, .8, 1.1, .90, 1],
+    y: [0, 0, -20, 0,  0],
+    fill: 'rgb(255, 255, 255)'
+  },
+  base: {
+    y: 0,
+    fill: 'rgb(226 232 240)',
+  }
 }
 
 export const contactLetterVariant = {
@@ -178,11 +246,22 @@ export const contactLetterVariant = {
   visible: {
     y: 0,
     opacity: 1,
+    fill: 'rgb(226 232 240)',
     transition: {
       type: "spring",
       bounce: 0.6,
     }
   },
+  hover: {
+    scaleX: [1, 1.2, .9, 1.1, 1],
+    scaleY: [1, .8, 1.1, .90, 1],
+    y: [0, 0, -20, 0,  0],
+    fill: 'rgb(255, 255, 255)'
+  },
+  base: {
+    y: 0,
+    fill: 'rgb(226 232 240)',
+  }
 }
 
 export const linkedInVariant = {
@@ -275,6 +354,11 @@ export const githubVariant = {
     transition: {
       staggerChildren: .05,
     }
+  }, 
+  hover: {
+    transition: {
+      staggerChildren: .05,
+    }
   }
 }
 
@@ -287,19 +371,16 @@ export const viewWorkSectionVariant = {
   }
 }
 
-export const bounceInVariant = {
+export const viewWorkVariant = {
   hidden: {
     opacity: 0,
-    top: "200%",
+    y: "100%",
   }, 
   visible: (i: number) => ({
-    opacity: 1,
-    top: 0,
+    opacity: .8,
+    y: 0,
     transition: {
-      type: "spring",
-      bounce: 0.6,
-      delay: i * .05 + 4,
-      duration: 5,
+      delay: i * .02,
     }
   })
 }
