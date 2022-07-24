@@ -1,0 +1,20 @@
+.mask {
+  fill: none;
+  stroke: white;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+@keyframes strokeOffset { 
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#mask-I-char {
+  animation: strokeOffset 5s linear forwards;
+}
+
+.buildStuff {
+  fill: blue;
+}
