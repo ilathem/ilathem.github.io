@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useAnimationControls, useAnimationFrame } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, useAnimationControls } from 'framer-motion';
 import './index.css'; 
 import {
   containerVariant,
@@ -16,7 +16,6 @@ import {
   linkedInVariant,
   linkedInLeftLetterVariant,
   linkedInRightLetterVariant,
-  linkedInLetterVariant,
   linkedLogoVariant,
   linkedLogoTextVariant,
   githubVariant,
@@ -33,11 +32,6 @@ function App() {
   const introStr = "I like to build stuff with computers";
   const introChars = introStr.split("");
 
-  const reachMeStr = "Reach me here"
-  const reachMeChars = reachMeStr.split("");
-
-  // console.log(introChars)
-
 
   const containerControls = useAnimationControls();
   const headerControls = useAnimationControls();
@@ -51,8 +45,8 @@ function App() {
   const viewWorkControls = useAnimationControls();
   const ghControls = useAnimationControls();
 
-
   useEffect(() => {
+
     containerControls.start("hidden");
     headerControls.start('hidden');
     titleControls.start('hidden');
@@ -64,6 +58,8 @@ function App() {
     hr2Controls.start('hidden');
     viewWorkControls.start('hidden');
     ghControls.start('hidden');
+
+    
     
 
     setTimeout(() => {
@@ -113,14 +109,16 @@ function App() {
     setTimeout(() => {
       introControls.start('hover');
     }, 6000)
+    
+    
 
-  }, [])
+  },[containerControls, discordControls, ghControls, headerControls, hr1Controls, hr2Controls, introControls, linkedControls, reachMeControls, titleControls, viewWorkControls])
 
   
 
-  const [discordHover, setDiscordHover] = useState(false);
+  // const [discordHover, setDiscordHover] = useState(false);
   const [linkedHover, setLinkedHover] = useState(false);
-  const [ghHover, setGhHover] = useState(false);
+
 
   return (
     <div className="bg-stone-600 w-screen h-screen flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
@@ -216,11 +214,11 @@ function App() {
             animate={discordControls}
             className="cursor-pointer mb-2"
             onMouseEnter={() => {
-              setDiscordHover(true)
+              // setDiscordHover(true)
               discordControls.start('hover')
             }}
             onMouseLeave={() => {
-              setDiscordHover(false)
+              // setDiscordHover(false)
               discordControls.start('base')
             }}
             onClick={() => {
@@ -346,11 +344,9 @@ function App() {
           <motion.svg width="400" height="60" viewBox="-20 -40 400 120" fill="none" xmlns="http://www.w3.org/2000/svg"
             className="cursor-pointer h-min"
             onMouseEnter={() => {
-              setGhHover(true)
               ghControls.start('hover')
             }}
             onMouseLeave={() => {
-              setGhHover(false)
               ghControls.start('base')
             }}
             variants={githubVariant}
