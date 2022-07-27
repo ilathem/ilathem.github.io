@@ -16,7 +16,7 @@ function RotatingStars():ReactElement  {
       // ref.current.rotation.x -= delta / 10;
       // ref.current.rotation.y -= delta / 15;
       if (ref.current) {
-        ref.current.Rotate();
+        Rotate(ref, delta);
       }
   });
   return (
@@ -24,10 +24,11 @@ function RotatingStars():ReactElement  {
   );
 }
 
-function Wrapper():ReactElement {
-  return (
+function Wrapper({ children }: { children?: ReactElement} ):ReactElement {
+  return (  
     <Canvas>
       <RotatingStars />
+      {children}
     </Canvas>
   );
 }

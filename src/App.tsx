@@ -39,7 +39,7 @@ function RotatingStars() {
     ref.current.rotation.x -= delta / 10;
     ref.current.rotation.y -= delta / 15;
   }
-  useFrame((state, delta) => {
+  useFrame((state: any, delta: number) => {
       // ref.current.rotation.x -= delta / 10;
       // ref.current.rotation.y -= delta / 15;
       if (ref.current) {
@@ -140,11 +140,9 @@ function App() {
 
 
   return (
-    <Canvas>
-      <RotatingStars />
-    <div className="bg-stone-600 w-screen h-screen flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
+    <div className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
       <motion.div
-        className="w-5/6 h-5/6  bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
+        className="w-5/6 h-5/6  bg-stone-800/30 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
         variants={containerVariant}
         animate={containerControls}
       >
@@ -418,7 +416,6 @@ function App() {
         
       </motion.div>
     </div>
-    </Canvas>
   );
 }
 
