@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, MutableRefObject, RefObject } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Stars } from '@react-three/drei';
+
 import './index.css'; 
 import {
   containerVariant,
@@ -26,6 +29,25 @@ import {
   logoDiscordVariant,
 } from './components/variants';
 
+interface StarsRef {
+  Rotate: () => void
+}
+
+function RotatingStars() {
+  const ref = useRef<StarsRef>(null);
+  function Rotate(ref: RefObject<any>, delta: number) {
+    ref.current.rotation.x -= delta / 10;
+    ref.current.rotation.y -= delta / 15;
+  }
+  useFrame((state, delta) => {
+      // ref.current.rotation.x -= delta / 10;
+      // ref.current.rotation.y -= delta / 15;
+      if (ref.current) {
+        ref.current.Rotate();
+      }
+  });
+  return <Stars ref={ref} fade />;
+}
 
 function App() {
 
@@ -57,10 +79,7 @@ function App() {
     linkedControls.start('hidden');
     hr2Controls.start('hidden');
     viewWorkControls.start('hidden');
-    ghControls.start('hidden');
-
-    
-    
+    ghControls.start('hidden');  
 
     setTimeout(() => {
       containerControls.start('visible');
@@ -121,6 +140,8 @@ function App() {
 
 
   return (
+    <Canvas>
+      <RotatingStars />
     <div className="bg-stone-600 w-screen h-screen flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
       <motion.div
         className="w-5/6 h-5/6  bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
@@ -397,6 +418,7 @@ function App() {
         
       </motion.div>
     </div>
+    </Canvas>
   );
 }
 
