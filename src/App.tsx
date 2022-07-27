@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef, RefObject } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useFrame } from '@react-three/fiber';
-import { Stars } from '@react-three/drei';
 
 import './index.css'; 
 import {
