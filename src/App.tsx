@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, MutableRefObject, RefObject } from 'react';
+import React, { useState, useEffect, useRef, RefObject } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 
 import './index.css'; 
@@ -28,26 +28,6 @@ import {
   contactDiscordLetterVariant,
   logoDiscordVariant,
 } from './components/variants';
-
-interface StarsRef {
-  Rotate: () => void
-}
-
-function RotatingStars() {
-  const ref = useRef<StarsRef>(null);
-  function Rotate(ref: RefObject<any>, delta: number) {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
-  }
-  useFrame((state: any, delta: number) => {
-      // ref.current.rotation.x -= delta / 10;
-      // ref.current.rotation.y -= delta / 15;
-      if (ref.current) {
-        ref.current.Rotate();
-      }
-  });
-  return <Stars ref={ref} fade />;
-}
 
 function App() {
 

@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import React, { Component, ReactElement, useRef } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
 interface StarsRef {
   Rotate: () => void
