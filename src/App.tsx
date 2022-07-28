@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
+
 import './index.css'; 
 import {
   containerVariant,
@@ -25,7 +26,6 @@ import {
   contactDiscordLetterVariant,
   logoDiscordVariant,
 } from './components/variants';
-
 
 function App() {
 
@@ -58,10 +58,7 @@ function App() {
     linkedControls.start('hidden');
     hr2Controls.start('hidden');
     viewWorkControls.start('hidden');
-    ghControls.start('hidden');
-
-    
-    
+    ghControls.start('hidden');  
 
     setTimeout(() => {
       containerControls.start('visible');
@@ -122,13 +119,9 @@ function App() {
 
 
   return (
-    <div className="bg-stone-600 w-screen h-screen flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200"
-    ref={constraintsRef}>
+    <div className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
       <motion.div
-        className="w-5/6 h-5/6  bg-stone-800 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
-        drag
-        dragConstraints={constraintsRef}
-        dragPropagation
+        className="w-5/6 h-5/6  bg-stone-800/30 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
         variants={containerVariant}
         animate={containerControls}
       >
