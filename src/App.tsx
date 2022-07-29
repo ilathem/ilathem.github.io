@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 
 import './index.css'; 
@@ -32,6 +32,7 @@ function App() {
   const introStr = "I like to build stuff with computers";
   const introChars = introStr.split("");
 
+  const constraintsRef = useRef(null);
 
   const containerControls = useAnimationControls();
   const headerControls = useAnimationControls();
@@ -118,11 +119,15 @@ function App() {
 
 
   return (
-    <div className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200">
+    <div className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200"
+      ref={constraintsRef}
+    >
       <motion.div
-        className="w-5/6 h-5/6  bg-stone-800/30 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
+        className="w-5/6 h-5/6 bg-stone-800/30 rounded-2xl drop-shadow-2xl grid grid-cols-2 grid-rows-3 gap-2 p-5 max-w-screen-sm"
         variants={containerVariant}
         animate={containerControls}
+        drag
+        dragConstraints={constraintsRef}
       >
         <motion.div className='row-start-1 col-span-2 flex flex-col '> 
           <motion.div className='sm:w-[28rem] sm:self-center border-none border-2'>

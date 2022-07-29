@@ -1,20 +1,15 @@
 export const containerVariant = {
   hidden: {
-    x: '-100vw',
+    // x: '-100vw',
     opacity: 0,
     scale: 0,
     rotate: -90
   },
   visible: {
     opacity: 1,
-    x: 0,
+    // x: 0,
     scale: 1,
     rotate: 0,
-    transition: {
-      // delay: 1,
-      // when: 'beforeChildren',
-      // staggerChildren: .5,
-    },
   },
 }
 
