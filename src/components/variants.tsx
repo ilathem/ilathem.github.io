@@ -12,7 +12,7 @@ export const containerVariant = {
 		rotate: 0,
 		transition: {
 			delay: 0.5,
-		staggerChildren: 1,
+			staggerChildren: 1,
 			delayChildren: 1,
 		},
 	},
@@ -64,7 +64,7 @@ export const introVariant = {
 		opacity: 0.8,
 		y: 0,
 		transition: {
-			delay: i * 0.01,
+			delay: i * .05,
 		},
 	}),
 	hover: (i: number) => ({

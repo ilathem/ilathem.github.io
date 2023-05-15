@@ -1,81 +1,67 @@
-import { motion } from 'framer-motion';
-import {
-  headerVariant,
-  nameVariant,
-  titleVariant,
-  introVariant,
-  hr1Variant,
-} from './variants';
+import { AnimationControls, motion, useAnimationControls } from 'framer-motion';
+import { useEffect } from 'react';
 
 function Intro() {
-	const introChars: Array<string> =
-		'I like to build stuff with computers'.split('');
-
+	const nameControls = useAnimationControls();
+	const phraseControls = useAnimationControls();
+	const horizontalLineControls = useAnimationControls();
+	useEffect(() => {
+		const animationOrder = [nameControls, phraseControls, horizontalLineControls];
+		for (let i = 0; i < animationOrder.length; i++) {
+			setTimeout(() => animationOrder[i].start('visible'), i * 200 + 1000)
+		}
+		setTimeout(() => phraseControls.start('hover'), 3000)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 	return (
-		<motion.div
-			className='row-start-1 col-span-2 flex flex-col '
-			variants={{
-				hidden: {
-					opacity: 0,
-				},
-				visible: {
-					opacity: 1,
-					transition: {
-						staggerChildren: .2,
-					},
-				},
-			}}
-		>
-			<Name />
-
-			<motion.div className='flex grow flex-col justify-around'
+		<motion.div className='row-start-1 col-span-2 flex flex-col '>
+			<Name nameControls={nameControls}/>
+			{/* <Phrase phraseControls={phraseControls}/> */}
+			<motion.hr
+				initial='hidden'
+				animate={horizontalLineControls}
+				className='justify-self-end my-2'
 				variants={{
 					hidden: {
-						opacity: 0,
+						scale: 0,
 					},
 					visible: {
-						opacity: 1,
+						opacity: 0.8,
+						originX: 0,
+						scale: 1,
 						transition: {
-							
-						}
-					}
+							duration: 0.5,
+						},
+					},
 				}}
-			>
-				<motion.p className='text-xl sm:text-3xl text-center font-["Edu_TAS_Beginner"] mb-3'>
-					{introChars.map((char, i) => {
-						// manually enter in spaces bc inline block removes them...?
-						if (char.charCodeAt(0) === 32) char = '\u00A0';
-						return (
-							<motion.span
-								key={i}
-								style={{ display: 'inline-block' }}
-								custom={i}
-								variants={introVariant}
-							>
-								{char}
-							</motion.span>
-						);
-					})}
-				</motion.p>
-				{/* <motion.p>Test String</motion.p> */}
-			</motion.div>
-
-
-			<motion.hr
-				className='justify-self-end mb-0'
-				variants={hr1Variant}
 			/>
 		</motion.div>
 	);
 }
 
-const Name = () => {
+const Name: React.FC<{nameControls: AnimationControls}> = ({nameControls}) => {
 	return (
 		<motion.div className='sm:w-[28rem] sm:self-center border-none border-2'>
 			<motion.div>
 				<motion.h1
 					className='m-0 text-2xl sm:text-4xl h-fit '
-					variants={headerVariant}
+					animate={nameControls}
+					initial='hidden'
+					variants={{
+						hidden: {
+							opacity: 0,
+							x: -50,
+						},
+						visible: {
+							x: 0,
+							opacity: 1,
+							transition: {
+								when: 'beforeChildren',
+								staggerChildren: 0.05,
+								delayChildren: .75,
+							},
+						},
+					}}
 				>
 					Hi, I'm
 					{[
@@ -96,7 +82,16 @@ const Name = () => {
 						return (
 							<motion.span
 								key={index}
-								variants={nameVariant}
+								variants={{
+									hidden: {
+										color: 'rgb(226 232 240)',
+										opacity: 0.5,
+									},
+									visible: {
+										color: 'rgb(29 235 217)',
+										opacity: 1,
+									},
+								}}
 							>
 								{letter}
 							</motion.span>
@@ -106,7 +101,16 @@ const Name = () => {
 			</motion.div>
 			<motion.p
 				className='text-sm h-fit m-0 p-0 text-right'
-				variants={titleVariant}
+				variants={{
+					hidden: {
+						opacity: 0,
+						x: 50,
+					},
+					visible: {
+						x: 0,
+						opacity: 0.8,
+					},
+				}}
 			>
 				Software developer
 			</motion.p>
@@ -114,4 +118,68 @@ const Name = () => {
 	);
 }
 
+const Phrase: React.FC<{phraseControls: AnimationControls}> = ({phraseControls}) => {
+	const introChars: Array<string> =
+		'I like to build stuff with computers'.split('');
+	return (
+		<motion.div className='flex grow flex-col justify-around'>
+			<motion.p className='text-xl sm:text-3xl text-center font-["Edu_TAS_Beginner"] mb-3'>
+				{introChars.map((char, i) => {
+					// manually enter in spaces bc inline block removes them...?
+					if (char.charCodeAt(0) === 32) char = '\u00A0';
+					return (
+						<motion.span
+							key={i}
+							style={{ display: 'inline-block' }}
+							custom={i}
+							animate={phraseControls}
+							initial='hidden'
+							variants={{
+								hidden: {
+									opacity: 0,
+									y: '100%',
+								},
+								visible: (i: number) => ({
+									opacity: 0.8,
+									y: 0,
+									transition: {
+										delay: i * 0.02,
+									},
+								}),
+								hover: (i: number) => ({
+									scaleX: [1, 1.2, 0.9, 1.1, 1],
+									scaleY: [1, 0.8, 1.1, 0.9, 1],
+									y: [0, 0, -20, 0, 0],
+									color: [
+										'rgb(226 232 240)',
+										'rgb(66, 135, 245)',
+										'rgb(224, 36, 174)',
+										'rgb(48, 184, 24)',
+										'rgb(27, 191, 186)',
+										'rgb(226 232 240)',
+									],
+									transition: {
+										duration: 1,
+										delay: i * 0.05,
+									},
+								}),
+								base: (i: number) => ({
+									y: 0,
+									color: 'rgb(226 232 240)',
+									transition: {
+										color: {
+											delay: i * 0.02,
+										},
+									},
+								}),
+							}}
+						>
+							{char}
+						</motion.span>
+					);
+				})}
+			</motion.p>
+		</motion.div>
+	)
+} 
 export default Intro;
