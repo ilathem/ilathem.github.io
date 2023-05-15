@@ -1,4 +1,10 @@
 # TODO
+## General
+
+- white shadow on hover
+- expandable sections with hover preview and tooltip to tell user that they can expand
+
+## Overall
 
 - Contact information (and link to github profile)
   - links to social media profiles (github/linked in) if they're relevant

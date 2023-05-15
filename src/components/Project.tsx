@@ -1,6 +1,4 @@
 import React from 'react';
-import '../styles/project.scss';
-
 interface ProjectProps {
   previewImg: string,
   tech: string,
