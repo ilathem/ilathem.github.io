@@ -1,13 +1,34 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, AnimationControls } from 'framer-motion';
 import { ImLinkedin } from 'react-icons/im';
+import { useForm, ValidationError } from '@formspree/react';
+import toast from 'react-hot-toast';
 
 export const Contact: React.FC<{
-	controls: AnimationControls;
-}> = ({ controls }) => {
+	controls: AnimationControls,
+	toast: typeof toast
+}> = ({ controls, toast }) => {
+	const [state, handleSubmit] = useForm('mnqyyvnj');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
 	const [isOpen, setIsOpen] = useState(false);
+	const [formSubmitted, setFormSubmitted] = useState(false);
+	useEffect(() => {
+		if (state.succeeded && formSubmitted) {
+			toast.dismiss();
+			toast.success("Form successfully submitted!")
+			setEmail('')
+			setMessage('')
+			setFormSubmitted(false);
+		}
+	}, [state.succeeded])
+	useEffect(() => {
+		if (state.submitting) {
+			toast.loading("Submitting form...")
+			setFormSubmitted(true);
+		}
+	}, [state.submitting])
 	return (
 		<motion.div
 			className={
@@ -52,23 +73,25 @@ export const Contact: React.FC<{
 				},
 			}}
 		>
-			<motion.p className='text-2xl text-center select-none'>Contact Info</motion.p>
+			<motion.p className='text-2xl text-center select-none'>
+				Contact Info
+			</motion.p>
 			<AnimatePresence>
 				{isOpen && (
 					<div className='border-0 border-gray-900 flex flex-col items-center justify-around'>
 						<ul className='flex flex-row my-2'>
 							<li>
-                                <ImLinkedin 
-                                    size='3em'
-                                    className='fill-[#0077B5] hover:brightness-110 hover:scale-110 transition'
-                                    title="My linked in profile"
+								<ImLinkedin
+									size='3em'
+									className='fill-[#0077B5] hover:brightness-110 hover:scale-110 transition'
+									title='My linked in profile'
 									onClick={() => {
 										window.open(
 											'https://www.linkedin.com/in/isaiahlathem/',
 											'_blank'
-										)
+										);
 									}}
-                                />
+								/>
 							</li>
 						</ul>
 						<form
@@ -76,6 +99,7 @@ export const Contact: React.FC<{
 							onClick={(e) => {
 								e.stopPropagation();
 							}}
+							onSubmit={handleSubmit}
 						>
 							<p className='text-lg mt-2'>Send me a message</p>
 							<input
@@ -84,18 +108,34 @@ export const Contact: React.FC<{
 								type='email'
 								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
 								placeholder='Email Address'
+								id="email"
+								name='email'
+							/>
+							<ValidationError 
+								prefix='Email'
+								field='email'
+								errors={state.errors}
 							/>
 							<textarea
+								id='message'
+								name='message'
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								placeholder='Message'
 								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
 							/>
-                            <button className='border-2 border-slate-300 text-xl px-4 py-2 shadow-md shadow-slate-500 rounded-lg my-1 justify-self-end w-min self-center hover:shadow-xl hover:shadow-slate-500 transition active:scale-90 focus:scale-105'
-								onClick={e => {
-									e.preventDefault();
-								}}
-							>Send</button>
+							<ValidationError 
+								prefix='Message'
+								field='message'
+								errors={state.errors}
+							/>
+							<button
+								type='submit'
+								disabled={state.submitting}
+								className='border-2 border-slate-300 text-xl px-4 py-2 shadow-md shadow-slate-500 rounded-lg my-1 justify-self-end w-min self-center hover:shadow-xl hover:shadow-slate-500 transition active:scale-90 focus:scale-105'
+							>
+								Send
+							</button>
 						</form>
 					</div>
 				)}
