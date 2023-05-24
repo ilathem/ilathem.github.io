@@ -6,7 +6,7 @@ function Intro() {
 	const phraseControls = useAnimationControls();
 	const horizontalLineControls = useAnimationControls();
 	useEffect(() => {
-		const animationOrder = [nameControls, phraseControls, horizontalLineControls];
+		const animationOrder = [nameControls, horizontalLineControls];
 		for (let i = 0; i < animationOrder.length; i++) {
 			setTimeout(() => animationOrder[i].start('visible'), i * 200 + 1000)
 		}
@@ -14,13 +14,13 @@ function Intro() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	return (
-		<motion.div className='row-start-1 col-span-2 flex flex-col '>
+		<motion.div className='row-start-1 col-span-2 flex flex-col w-full'>
 			<Name nameControls={nameControls}/>
 			{/* <Phrase phraseControls={phraseControls}/> */}
 			<motion.hr
 				initial='hidden'
 				animate={horizontalLineControls}
-				className='justify-self-end my-2'
+				className='justify-self-end my-2 w-full'
 				variants={{
 					hidden: {
 						scale: 0,
