@@ -4,15 +4,17 @@ import { motion, AnimatePresence, AnimationControls } from 'framer-motion';
 import { ImLinkedin } from 'react-icons/im';
 import { useForm, ValidationError } from '@formspree/react';
 import toast from 'react-hot-toast';
+import { Sections } from '../types/types';
 
 export const Contact: React.FC<{
 	controls: AnimationControls,
-	toast: typeof toast
-}> = ({ controls, toast }) => {
+	toast: typeof toast,
+	openSection: Sections,
+	toggleSection: Function,
+}> = ({ controls, toast, openSection, toggleSection }) => {
 	const [state, handleSubmit] = useForm('mnqyyvnj');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
-	const [isOpen, setIsOpen] = useState(false);
 	const [formSubmitted, setFormSubmitted] = useState(false);
 	useEffect(() => {
 		if (state.succeeded && formSubmitted) {
@@ -32,16 +34,17 @@ export const Contact: React.FC<{
 	return (
 		<motion.div
 			className={
-				isOpen
+				openSection.contact
 					? 'w-5/6 bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 m-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition'
 					: 'w-5/6 bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 m-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition'
 			}
 			onClick={(e) => {
-				if (!isOpen) {
-					setIsOpen(true);
+				if (!openSection.contact) {
+					toggleSection();
 					controls.start('open');
-				} else if (isOpen) {
-					setIsOpen(false);
+				} else if (openSection.contact) {
+					toggleSection();
+					controls.start('open');
 					controls.start('closed');
 				}
 			}}
@@ -77,7 +80,7 @@ export const Contact: React.FC<{
 				Contact Info
 			</motion.p>
 			<AnimatePresence>
-				{isOpen && (
+				{openSection.contact && (
 					<div className='border-0 border-gray-900 flex flex-col items-center justify-around'>
 						<ul className='flex flex-row my-2'>
 							<li>
