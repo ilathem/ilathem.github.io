@@ -12,7 +12,7 @@ function App() {
 	const aboutControls = useAnimationControls();
 	const contactControls = useAnimationControls();
 	const [openSection, setOpenSection] = useState<Sections>({
-		about: true,
+		about: false,
 		contact: false,
 	});
 	const [controlObj, setControlObj] = useState<SectionsControls>();
@@ -20,7 +20,6 @@ function App() {
 		setTimeout(() => {
 			aboutControls
 				.start('closed')
-				.then(() => aboutControls.start('open'));
 		}, 1300);
 		setTimeout(() => {
 			contactControls.start('closed');
@@ -50,7 +49,7 @@ function App() {
 				}}
 			/>
 			<motion.div
-				className='w-5/6 h-5/6 bg-stone-800/80 rounded-2xl shadow-2xl shadow-[#1debd9]/25 transition-shadow flex flex-col items-center p-5 max-w-screen-sm'
+				className='overflow-y-auto overflow-x-hidden w-5/6 h-5/6 bg-stone-800/80 rounded-2xl shadow-2xl shadow-[#1debd9]/25 transition-shadow flex flex-col items-center p-5 max-w-screen-sm'
 				variants={{
 					hidden: {
 						opacity: 0,

@@ -112,7 +112,7 @@ const Name: React.FC<{nameControls: AnimationControls}> = ({nameControls}) => {
 					},
 				}}
 			>
-				Software developer
+				Software Engineer
 			</motion.p>
 		</motion.div>
 	);
