@@ -6,14 +6,17 @@ import './index.css';
 import Intro from './components/Intro';
 import { Contact } from './components/Contact';
 import { Sections, SectionsControls } from './types/types';
+import { Experience } from './components/Experience';
 
 function App() {
 	const constraintsRef = useRef<HTMLDivElement>(null);
 	const aboutControls = useAnimationControls();
 	const contactControls = useAnimationControls();
+	const experienceControls = useAnimationControls();
 	const [openSection, setOpenSection] = useState<Sections>({
 		about: false,
 		contact: false,
+		experience: false,
 	});
 	const [controlObj, setControlObj] = useState<SectionsControls>();
 	useEffect(() => {
@@ -23,10 +26,14 @@ function App() {
 		}, 1300);
 		setTimeout(() => {
 			contactControls.start('closed');
+		}, 1400);
+		setTimeout(() => {
+			experienceControls.start('closed');
 		}, 1500);
 		setControlObj({
 			about: aboutControls,
 			contact: contactControls,
+			experience: experienceControls,
 		})
 	}, []);
 	useEffect(() => {
@@ -49,7 +56,7 @@ function App() {
 				}}
 			/>
 			<motion.div
-				className='overflow-y-auto overflow-x-hidden w-5/6 h-5/6 bg-stone-800/80 rounded-2xl shadow-2xl shadow-[#1debd9]/25 transition-shadow flex flex-col items-center p-5 max-w-screen-sm'
+				className='overflow-y-hidden overflow-x-hidden w-5/6 h-min bg-stone-800/80 rounded-2xl shadow-2xl shadow-[#1debd9]/25 transition-shadow flex flex-col items-center p-5 max-w-screen-sm'
 				variants={{
 					hidden: {
 						opacity: 0,
@@ -75,16 +82,29 @@ function App() {
 						setOpenSection({
 							contact: false,
 							about: !openSection.about,
+							experience: false,
 						});
 					}}
 					openSection={openSection}
 					controls={aboutControls}
+				/>
+				<Experience
+					toggleSection={() => {
+						setOpenSection({
+							experience: !openSection.experience,
+							about: false,
+							contact: false,
+						});
+					}}
+					openSection={openSection}
+					controls={experienceControls}
 				/>
 				<Contact
 					toggleSection={() => {
 						setOpenSection({
 							contact: !openSection.contact,
 							about: false,
+							experience: false,
 						});
 					}}
 					openSection={openSection}

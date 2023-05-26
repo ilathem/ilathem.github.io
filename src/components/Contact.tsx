@@ -5,6 +5,7 @@ import { ImLinkedin } from 'react-icons/im';
 import { useForm, ValidationError } from '@formspree/react';
 import toast from 'react-hot-toast';
 import { Sections } from '../types/types';
+import liLogo from '../img/LI-Logo.png'
 
 export const Contact: React.FC<{
 	controls: AnimationControls,
@@ -31,7 +32,7 @@ export const Contact: React.FC<{
 			setFormSubmitted(true);
 		}
 	}, [state.submitting])
-	return (
+    return (
 		<motion.div
 			className={
 				openSection.contact
@@ -68,37 +69,35 @@ export const Contact: React.FC<{
 					width: '80%',
 				},
 				open: {
-					height: '350px',
+					height: '370px',
 					scale: 1,
 					transition: {
 						type: 'tween',
-						ease: 'backOut',
+						ease: 'easeOut',
 					},
 					width: '90%',
 				},
 			}}
 		>
-			<motion.p className='text-2xl text-center select-none hover:text-[#1debd9]'>
+			<motion.p className='text-2xl text-center select-none hover:text-[#1debd9] transition'>
 				Contact Info
 			</motion.p>
 			<AnimatePresence>
 				{openSection.contact && (
 					<div className='border-0 border-gray-900 flex flex-col items-center justify-around'>
-						<ul className='flex flex-row my-2'>
-							<li>
-								<ImLinkedin
-									size='3em'
-									className='fill-[#0077B5] hover:brightness-110 hover:scale-110 transition'
-									title='My linked in profile'
-									onClick={() => {
-										window.open(
-											'https://www.linkedin.com/in/isaiahlathem/',
-											'_blank'
-										);
-									}}
-								/>
-							</li>
-						</ul>
+						<div className='w-full my-2 h-[1px] bg-slate-200/50' />
+						<p>Reach out to me on LinkedIn:</p>
+						<img
+							onClick={() => {
+								window.open(
+									'https://www.linkedin.com/in/isaiahlathem/',
+									'_blank'
+								);
+							}}
+							src={liLogo}
+							className='h-12 brightness-90 hover:brightness-100'
+							alt='Link to my LinkedIn Profile'
+						/>
 						<form
 							className='border-0 border-green-500 w-5/6 flex flex-col'
 							onClick={(e) => {
@@ -106,17 +105,19 @@ export const Contact: React.FC<{
 							}}
 							onSubmit={handleSubmit}
 						>
-							<p className='text-lg mt-2'>Send me a message</p>
+							<p className='text-center mt-2'>
+								Or send me a message directly:
+							</p>
 							<input
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								type='email'
 								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
 								placeholder='Email Address'
-								id="email"
+								id='email'
 								name='email'
 							/>
-							<ValidationError 
+							<ValidationError
 								prefix='Email'
 								field='email'
 								errors={state.errors}
@@ -129,7 +130,7 @@ export const Contact: React.FC<{
 								placeholder='Message'
 								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
 							/>
-							<ValidationError 
+							<ValidationError
 								prefix='Message'
 								field='message'
 								errors={state.errors}
