@@ -36,8 +36,8 @@ export const Contact: React.FC<{
 		<motion.div
 			className={
 				openSection.contact
-					? 'bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition'
-					: 'bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition'
+					? 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition'
+					: 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition'
 			}
 			onClick={(e) => {
 				if (!openSection.contact) {
@@ -79,7 +79,7 @@ export const Contact: React.FC<{
 				},
 			}}
 		>
-			<motion.p className='text-2xl text-center select-none hover:text-[#1debd9] transition'>
+			<motion.p className='text-2xl text-center select-none group-hover:text-[#1debd9] transition'>
 				Contact Info
 			</motion.p>
 			<AnimatePresence>

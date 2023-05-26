@@ -12,8 +12,8 @@ export const Experience: React.FC<{
 		<motion.div
 			className={
 				openSection.experience
-					? 'bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition flex flex-col items-center'
-					: 'bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition flex flex-col items-center'
+					? 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition flex flex-col items-center'
+					: 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition flex flex-col items-center'
 			}
 			onClick={(e) => {
 				if (!openSection.experience) {
@@ -55,7 +55,7 @@ export const Experience: React.FC<{
 				},
 			}}
 		>
-			<p className='text-2xl text-center select-none hover:text-[#1debd9] transition'>
+			<p className='text-2xl text-center select-none group-hover:text-[#1debd9] transition'>
 				Experience
 			</p>
 			{openSection.experience && (
