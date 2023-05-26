@@ -69,7 +69,7 @@ export const Contact: React.FC<{
 					width: '80%',
 				},
 				open: {
-					height: '370px',
+					height: '400px',
 					scale: 1,
 					transition: {
 						type: 'tween',
@@ -86,63 +86,67 @@ export const Contact: React.FC<{
 				{openSection.contact && (
 					<div className='border-0 border-gray-900 flex flex-col items-center justify-around'>
 						<div className='w-full my-2 h-[1px] bg-slate-200/50' />
-						<p>Reach out to me on LinkedIn:</p>
-						<img
-							onClick={() => {
-								window.open(
-									'https://www.linkedin.com/in/isaiahlathem/',
-									'_blank'
-								);
-							}}
-							src={liLogo}
-							className='h-12 brightness-90 hover:brightness-100'
-							alt='Link to my LinkedIn Profile'
-						/>
-						<form
-							className='border-0 border-green-500 w-5/6 flex flex-col'
-							onClick={(e) => {
-								e.stopPropagation();
-							}}
-							onSubmit={handleSubmit}
-						>
-							<p className='text-center mt-2'>
-								Or send me a message directly:
-							</p>
-							<input
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								type='email'
-								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
-								placeholder='Email Address'
-								id='email'
-								name='email'
+                        <div className='w-full bg-stone-700/25 flex flex-col items-center pb-2 rounded-xl shadow'>
+							<p>Reach out to me on LinkedIn:</p>
+							<img
+								onClick={() => {
+									window.open(
+										'https://www.linkedin.com/in/isaiahlathem/',
+										'_blank'
+									);
+								}}
+								src={liLogo}
+								className='h-12 brightness-90 hover:brightness-100'
+								alt='Link to my LinkedIn Profile'
 							/>
-							<ValidationError
-								prefix='Email'
-								field='email'
-								errors={state.errors}
-							/>
-							<textarea
-								id='message'
-								name='message'
-								value={message}
-								onChange={(e) => setMessage(e.target.value)}
-								placeholder='Message'
-								className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
-							/>
-							<ValidationError
-								prefix='Message'
-								field='message'
-								errors={state.errors}
-							/>
-							<button
-								type='submit'
-								disabled={state.submitting}
-								className='border-2 border-slate-300 text-xl px-4 py-2 shadow-md shadow-slate-500 rounded-lg my-1 justify-self-end w-min self-center hover:shadow-xl hover:shadow-slate-500 transition active:scale-90 focus:scale-105'
+						</div>
+                        <div className='w-full bg-stone-700/25 flex flex-col items-center mt-2 py-2 rounded-xl shadow'>
+							<form
+								className='border-0 border-green-500 w-5/6 flex flex-col'
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								onSubmit={handleSubmit}
 							>
-								Send
-							</button>
-						</form>
+								<p className='text-center mt-2'>
+									Or send me a message directly:
+								</p>
+								<input
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									type='email'
+									className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
+									placeholder='Email Address'
+									id='email'
+									name='email'
+								/>
+								<ValidationError
+									prefix='Email'
+									field='email'
+									errors={state.errors}
+								/>
+								<textarea
+									id='message'
+									name='message'
+									value={message}
+									onChange={(e) => setMessage(e.target.value)}
+									placeholder='Message'
+									className='rounded-lg border-slate-300 border-2 text-lg bg-transparent p-2 w-full my-1 shadow-md shadow-slate-500 focus:scale-105 transition'
+								/>
+								<ValidationError
+									prefix='Message'
+									field='message'
+									errors={state.errors}
+								/>
+								<button
+									type='submit'
+									disabled={state.submitting}
+									className='border-2 border-slate-300 text-xl px-4 py-2 shadow-md shadow-slate-500 rounded-lg my-1 justify-self-end w-min self-center hover:shadow-xl hover:shadow-slate-500 transition active:scale-90 focus:scale-105'
+								>
+									Send
+								</button>
+							</form>
+						</div>
 					</div>
 				)}
 			</AnimatePresence>
