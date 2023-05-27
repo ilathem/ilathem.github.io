@@ -1,112 +1,98 @@
-import React from 'react';
-import { 
-  FaDownload, 
-  FaGithub, 
-  FaLinkedinIn,
-  FaReact,
-  FaJava,
-  FaJsSquare,
-  FaSass
-} from 'react-icons/fa'
-import { SiCplusplus, SiC, SiHtml5, SiCss3, SiNodedotjs, SiTypescript } from 'react-icons/si';
+import { AnimationControls, motion } from 'framer-motion';
+import { Sections } from '../types/types';
+import asu2 from '../img/asu2.png';
 
-import '../styles/about.scss';
+export const About: React.FC<{
+    controls: AnimationControls;
+    openSection: Sections;
+    toggleSection: Function;
+}> = ({ controls, openSection, toggleSection }) => {
+    return (
+        <motion.div
+            className={
+                openSection.about
+                    ? 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-[#1debd9] border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-[#1debd9] cursor-pointer transition'
+                    : 'group bg-stone-800 hover:shadow-[#1debd9]/50 rounded-lg border-slate-200 border-2 p-2 my-2 shadow-md hover:border-[#1debd9] hover:shadow-xl shadow-slate-500 cursor-pointer transition'
+            }
+            onClick={(e) => {
+                if (!openSection.about) {
+                    toggleSection();
+                    controls.start('open');
+                } else if (openSection.about) {
+                    toggleSection();
+                    controls.start('closed');
+                }
+            }}
+            initial='hidden'
+            animate={controls}
+            variants={{
+                hidden: {
+                    opacity: 0,
+                    scale: 0,
+                },
+                closed: {
+                    opacity: 1,
+                    scale: 1,
+                    scaleY: 1,
+                    scaleX: 1,
+                    height: '50px',
+                    transition: {
+                        type: 'tween',
+                        ease: 'easeOut',
+                    },
+                    width: '80%',
+                },
+                open: {
+                    height: '520px',
+                    scale: 1,
+                    transition: {
+                        type: 'tween',
+                        ease: 'easeOut',
+                    },
+                    width: '100%',
+                },
+            }}
+        >
+            <motion.p className='text-2xl text-center select-none transition group-hover:text-[#1debd9]'>
+                About Me
+            </motion.p>
+            {openSection.about && (
+                <div className='flex flex-col items-center w-full'>
+                    <div className='flex flex-col text-center w-full'>
+                        <div className='w-full my-2 h-[1px] bg-slate-200/50' />
+                        <div className='bg-stone-700/25 py-2 rounded-xl shadow'>
+                            <p className='text-lg underline underline-offset-2'>Proficiencies</p>
+                            <div className='flex flex-row justify-evenly overflow-x-auto'>
+                                <List list={['Languages', 'Java', 'C/C++', 'JavaScript', 'TypeScript', 'HTML', 'CSS']} />
+                                <List list={['Skills', 'Fullstack Web Dev', 'Database Design', 'UI/UX']} />
+                                <List list={['Frameworks', 'React', 'Astro', 'Vue', 'Tailwind', 'Next']} />
+                            </div>
+                        </div>
+                        <div className='bg-stone-700/25 flex flex-col items-center mt-2 py-2 rounded-xl shadow'>
+                            <p className='text-lg underline underline-offset-2'>Education</p>
+                            <img src={asu2} className='bg-white rounded-xl w-1/2 self-center mb-2' alt="Arizona State Univeristy Logo" />
+                            <p className='w-1/2 self-center'>Bachelor's of Science in Software Engineering at Arizona State University</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </motion.div>
+    );
+};
 
-function About() {
-
-  return (
-    <div className="about-container">
-      <div className="about-me-div">
-        <h1 className="about-me-header">About Me</h1>
-        <p className="about-me-txt">Junior-level developer pursuing a bachelor's in software engineering with a focus in full-stack web development.</p>
-        <br />
-        <p className="about-me-txt">
-          I'm passionate about building beautiful, effective UIs that run on a highly
-          maintainable and modifiable codebase for fast feature integration, testing, and 
-          technology transfer. 
-        </p>
-        <br/>
-        <ul className="about-me-ul">
-          <li className="about-me-li">
-            <FaDownload style={{ marginRight: '.5em'}}/>
-            Résumé (CV)
-          </li>
-          <li className="about-me-li">
-            <FaDownload style={{ marginRight: '.5em'}}/>
-            (Unofficial) College Transcript
-          </li>
-          <li className="about-me-li" onClick={() => {
-            window.open("https://github.com/ilathem", '_blank');
-          }}>
-            <FaGithub style={{ marginRight: '.5em'}} />
-            GitHub
-          </li>
-          <li className="about-me-li" onClick={() => {
-            window.open("https://www.linkedin.com/in/isaiahlathem", '_blank');
-          }}>
-            <FaLinkedinIn style={{ marginRight: '.5em'}} />
-            LinkedIn
-          </li>
+const List: React.FC<{ list: Array<string> }> = ({ list }) => {
+    return (
+        <ul className='border-2 border-slate-400 p-2 rounded-xl h-min'>
+            {list.map((value, index) => {
+                return (
+                    <li key={value} className={
+                        index === 0 ?
+                            'text-slate-200 pb-2'
+                            :
+                            'text-slate-200/80'
+                    }>{value}</li>
+                )
+            })}
         </ul>
-      </div>
-      <div className="skills-div">
-        <h2 className="skills-header">Skills</h2>
-          <div className="skills-grid">
-            <div className="skills-grid-item level-2" id="item1">
-              <FaReact className="skills-grid-item-icon"/>
-              <br />
-              React
-            </div>
-            <div className="skills-grid-item level-2" id="item2">
-              <FaJava className="skills-grid-item-icon"/>
-              <br/>
-              Java
-            </div>
-            <div className="skills-grid-item level-2" id="item3">
-              <FaJsSquare className="skills-grid-item-icon"/>
-              <br />
-              JavaScript
-            </div>
-            <div className="skills-grid-item level-1" id="item4">
-              <SiCplusplus className="skills-grid-item-icon"/>
-              <br />
-              C++
-            </div>
-            <div className="skills-grid-item level-1" id="item5">
-              <SiC className="skills-grid-item-icon"/>
-              <br />
-              C
-            </div>
-            <div className="skills-grid-item level-2" id="item6">
-              <SiHtml5 className="skills-grid-item-icon"/>
-              <br />
-              HTML
-            </div>
-            <div className="skills-grid-item level-1" id="item6">
-              <SiTypescript className="skills-grid-item-icon"/>
-              <br />
-              TypeScript
-            </div>
-            <div className="skills-grid-item level-2" id="item7">
-              <SiCss3 className="skills-grid-item-icon"/>
-              <br />
-              CSS
-            </div>
-            <div className="skills-grid-item level-1" id="item8">
-              <FaSass className="skills-grid-item-icon"/>
-              <br />
-              SASS
-            </div>
-            <div className="skills-grid-item level-1" id="item9">
-              <SiNodedotjs className="skills-grid-item-icon"/>
-              <br />
-              Node.js
-            </div>
-          </div>
-      </div>
-    </div>
-  )
-
+    )
 }
-
-export default About;
