@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, AnimationControls } from 'framer-motion';
-import { ImLinkedin } from 'react-icons/im';
 import { useForm, ValidationError } from '@formspree/react';
 import toast from 'react-hot-toast';
 import { Sections } from '../types/types';

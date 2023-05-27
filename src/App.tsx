@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useEffect, useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
