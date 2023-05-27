@@ -23,13 +23,13 @@ function App() {
 		setTimeout(() => {
 			aboutControls
 				.start('closed')
-		}, 1300);
-		setTimeout(() => {
-			contactControls.start('closed');
-		}, 1400);
+		}, 1000);
 		setTimeout(() => {
 			experienceControls.start('closed');
-		}, 1500);
+		}, 1100);
+		setTimeout(() => {
+			contactControls.start('closed');
+		}, 1200);
 		setControlObj({
 			about: aboutControls,
 			contact: contactControls,
