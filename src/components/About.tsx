@@ -1,15 +1,18 @@
+import { useState } from 'react';
 import { AnimatePresence, AnimationControls, motion } from 'framer-motion';
 import { Sections } from '../types/types';
 import asu2 from '../img/asu2.png';
 import { Document, pdfjs, Page } from 'react-pdf';
-import { useState } from 'react';
 import 'react-pdf/dist/esm/Page/TextLayer.css'; // remove text below pdf
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'; // remove empty space below pdf
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-	'pdfjs-dist/build/pdf.worker.min.js',
-	import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+// 	'pdfjs-dist/build/pdf.worker.min.js',
+// 	import.meta.url
+// ).toString();
+
+const url = `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
+pdfjs.GlobalWorkerOptions.workerSrc = url
 
 export const About: React.FC<{
 	controls: AnimationControls;
