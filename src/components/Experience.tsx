@@ -45,7 +45,7 @@ export const Experience: React.FC<{
 					width: '80%',
 				},
 				open: {
-					height: '600px',
+					height: '150px',
 					scale: 1,
 					transition: {
 						type: 'tween',

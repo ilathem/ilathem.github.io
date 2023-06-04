@@ -46,7 +46,7 @@ function App() {
 	}, [openSection])
 	return (
 		<motion.div
-			className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-hidden font-['Comfortaa'] text-slate-200"
+			className="w-screen h-screen absolute top-0 flex items-center justify-center overflow-auto font-['Comfortaa'] text-slate-200"
 			ref={constraintsRef}
 			initial='hidden'
 			animate='visible'
